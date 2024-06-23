@@ -6,11 +6,11 @@
 
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] [%-5level] %c{36}:%L --- %m%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t %traceId %segmentId (%F:%L) %c - %msg %n"/>
         </Console>
 
         <File name="file" fileName="${LOG_HOME}/file.log">
-            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] %l %c{36} - %m%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t %traceId %segmentId (%F:%L) %c{1.} - %replace{%msg %xEx{full}}{(\n|\r)+}{##}%n"/>
         </File>
 
         <RandomAccessFile name="accessFile" fileName="${LOG_HOME}/random.log">
