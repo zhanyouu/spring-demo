@@ -3,6 +3,7 @@ package com.zhanyou.log;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.skywalking.apm.toolkit.trace.ActiveSpan;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -22,6 +23,7 @@ public class AttaApiInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         try {
+            ActiveSpan.tag(REQUEST_ID_HEADER_NAME, request.getHeader(REQUEST_ID_HEADER_NAME));
             response.setHeader(REQUEST_ID_HEADER_NAME, request.getHeader(REQUEST_ID_HEADER_NAME));
             request.setAttribute(REQUEST_TIME_ATTR_NAME, System.currentTimeMillis());
         } catch (Exception e) {
